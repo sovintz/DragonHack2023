@@ -50,7 +50,7 @@ const BinMarker = ({ bin }: Props): JSX.Element => {
                 <div className="inline-flex space-x-1 items-center">
                   <Trash2 className="h-4 w-4" />
                   <div className="text-xs text-muted-foreground">
-                    {bin.level} % full
+                    {bin.level.toFixed(2)} % full
                   </div>
                 </div>
               )}
