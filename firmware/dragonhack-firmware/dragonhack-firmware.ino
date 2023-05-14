@@ -38,9 +38,9 @@ void generateTopics();
 // ------------------------------------------------------------------
 
 // used pins of micro controller definitions
-int lidPin = D7;    // Lid sensor
+int lidPin = D5;    // Lid sensor
 int trigPin = D6;    // Trigger
-int echoPin = D5;    // Echo
+int echoPin = D7;    // Echo
 
 // ------------------------------------------------------------------
 // GLOBAL VARIABLES    GLOBAL VARIABLES     GLOBAL VARIABLES
@@ -57,7 +57,7 @@ char macAddress[18];
 float dist = 0;
 long duration;
 int lidOpen, lidPrevious;
-# define READ_DELAY 5000
+# define READ_DELAY 1000
 # define AVG_TRIES 1
 
 // MQTT variables

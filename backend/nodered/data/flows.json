@@ -1,0 +1,946 @@
+[
+    {
+        "id": "043bdcd48eb6f05d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "10b482747f682a4d",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4e20533703194c4c",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "69a536c644a1407b",
+        "type": "mqtt-broker",
+        "name": "MQTT server",
+        "broker": "192.168.26.64",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "2dd66c70fd69d1b5",
+        "type": "mongodb4-client",
+        "name": "",
+        "protocol": "mongodb+srv",
+        "hostname": "cluster0.dxnjgnw.mongodb.net",
+        "port": "",
+        "dbName": "BinBrain",
+        "appName": "",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsCertificateKeyFile": "",
+        "tlsInsecure": false,
+        "connectTimeoutMS": "30000",
+        "socketTimeoutMS": "0",
+        "minPoolSize": "0",
+        "maxPoolSize": "100",
+        "maxIdleTimeMS": "0",
+        "uri": "",
+        "advanced": "{}",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
+        "id": "cbb10ae872aeb909",
+        "type": "mqtt in",
+        "z": "043bdcd48eb6f05d",
+        "name": "Status",
+        "topic": "BinBrain/Bin1/STATUS",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "69a536c644a1407b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "b0aa1e80df0132f2"
+            ]
+        ]
+    },
+    {
+        "id": "b0aa1e80df0132f2",
+        "type": "debug",
+        "z": "043bdcd48eb6f05d",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "498a44f12e38994a",
+        "type": "mqtt in",
+        "z": "043bdcd48eb6f05d",
+        "name": "Distance",
+        "topic": "BinBrain/Bin1/DIST",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "69a536c644a1407b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "b0aa1e80df0132f2"
+            ]
+        ]
+    },
+    {
+        "id": "135a9138005a6e3e",
+        "type": "mqtt in",
+        "z": "043bdcd48eb6f05d",
+        "name": "Lid",
+        "topic": "BinBrain/Bin1/LID",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "69a536c644a1407b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 240,
+        "wires": [
+            [
+                "b0aa1e80df0132f2"
+            ]
+        ]
+    },
+    {
+        "id": "c90e04c995fe7685",
+        "type": "mongodb4",
+        "z": "043bdcd48eb6f05d",
+        "clientNode": "2dd66c70fd69d1b5",
+        "mode": "collection",
+        "collection": "bins",
+        "operation": "insertOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": true,
+        "name": "",
+        "x": 420,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a47757f56e89cc9",
+        "type": "inject",
+        "z": "043bdcd48eb6f05d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[{\"name\":\"Anna\",\"age\":1}]",
+        "payloadType": "json",
+        "x": 210,
+        "y": 300,
+        "wires": [
+            [
+                "c90e04c995fe7685"
+            ]
+        ]
+    },
+    {
+        "id": "adb3387d212d8888",
+        "type": "http in",
+        "z": "10b482747f682a4d",
+        "name": "[GET] all bins",
+        "url": "/bins",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 100,
+        "wires": [
+            [
+                "f6c387d9b867b17e"
+            ]
+        ]
+    },
+    {
+        "id": "1dde13b963b2904f",
+        "type": "http in",
+        "z": "10b482747f682a4d",
+        "name": "[GET] bin by id",
+        "url": "/bins/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "2e204eb2761bba5b",
+                "2863e838119a6c49"
+            ]
+        ]
+    },
+    {
+        "id": "2863e838119a6c49",
+        "type": "debug",
+        "z": "10b482747f682a4d",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "45d1353363a18e11",
+        "type": "http response",
+        "z": "10b482747f682a4d",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 580,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f6c387d9b867b17e",
+        "type": "mongodb4",
+        "z": "10b482747f682a4d",
+        "clientNode": "2dd66c70fd69d1b5",
+        "mode": "collection",
+        "collection": "bins",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": true,
+        "name": "",
+        "x": 390,
+        "y": 100,
+        "wires": [
+            [
+                "45d1353363a18e11"
+            ]
+        ]
+    },
+    {
+        "id": "a99977c6dfbe4a21",
+        "type": "mongodb4",
+        "z": "10b482747f682a4d",
+        "clientNode": "2dd66c70fd69d1b5",
+        "mode": "collection",
+        "collection": "bins",
+        "operation": "findOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": true,
+        "name": "",
+        "x": 500,
+        "y": 320,
+        "wires": [
+            [
+                "2863e838119a6c49",
+                "ff5524931c0d954e"
+            ]
+        ]
+    },
+    {
+        "id": "42dc79b4b4074cf2",
+        "type": "http response",
+        "z": "10b482747f682a4d",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1060,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "2e204eb2761bba5b",
+        "type": "function",
+        "z": "10b482747f682a4d",
+        "name": "findOne",
+        "func": "msg.payload = {'_id': msg.req.params.id};\n//newMsg.projection = { 'name' : 1 , '_id' : 0 };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "a99977c6dfbe4a21",
+                "2863e838119a6c49"
+            ]
+        ]
+    },
+    {
+        "id": "5171304c8263d922",
+        "type": "http in",
+        "z": "10b482747f682a4d",
+        "name": "[POST] add bin",
+        "url": "/bins",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 600,
+        "wires": [
+            [
+                "165d9054d5371149",
+                "c8eb71589ca76cba"
+            ]
+        ]
+    },
+    {
+        "id": "c8eb71589ca76cba",
+        "type": "debug",
+        "z": "10b482747f682a4d",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5306f5299003e06b",
+        "type": "mongodb4",
+        "z": "10b482747f682a4d",
+        "clientNode": "2dd66c70fd69d1b5",
+        "mode": "collection",
+        "collection": "bins",
+        "operation": "insertOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": true,
+        "name": "",
+        "x": 380,
+        "y": 700,
+        "wires": [
+            [
+                "9195dd6a75d65754",
+                "c8eb71589ca76cba"
+            ]
+        ]
+    },
+    {
+        "id": "9195dd6a75d65754",
+        "type": "http response",
+        "z": "10b482747f682a4d",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 580,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "165d9054d5371149",
+        "type": "function",
+        "z": "10b482747f682a4d",
+        "name": "insertOne",
+        "func": "msg.payload = { \n    'coordinates': msg.req.body.coordinates,\n    'level': -1,\n    'closed': false,\n    'battery': -1,\n    'public' : true\n};\n//newMsg.projection = { 'name' : 1 , '_id' : 0 };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 700,
+        "wires": [
+            [
+                "5306f5299003e06b",
+                "c8eb71589ca76cba"
+            ]
+        ]
+    },
+    {
+        "id": "9a6db6fc49657e06",
+        "type": "debug",
+        "z": "10b482747f682a4d",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ff5524931c0d954e",
+        "type": "switch",
+        "z": "10b482747f682a4d",
+        "name": "",
+        "property": "payload._id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "6460229dd4ba9a789af1ef54",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 360,
+        "wires": [
+            [
+                "60920fcc55f21233"
+            ],
+            [
+                "42dc79b4b4074cf2"
+            ]
+        ]
+    },
+    {
+        "id": "60920fcc55f21233",
+        "type": "function",
+        "z": "10b482747f682a4d",
+        "name": "function 1",
+        "func": "\nlet level = flow.get(\"distance\");\nconst closed = !flow.get(\"opened\");\n\nif (level > 300 || !closed){\n    level = -1\n}\nelse\n    level = 100 - level / 2.3941\n\nmsg.payload.level = level\nmsg.payload.closed = closed\n\nconst newMsg = {}\nnewMsg.payload = [\n    {\"_id\": msg.payload._id}, \n    { \n        $set: { ...msg.payload } \n    }\n]\n\nreturn [msg, newMsg];\n\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 260,
+        "wires": [
+            [
+                "42dc79b4b4074cf2"
+            ],
+            [
+                "9a6db6fc49657e06",
+                "ff91f10fa149fe79"
+            ]
+        ]
+    },
+    {
+        "id": "09cf74b81a45d25f",
+        "type": "mqtt in",
+        "z": "10b482747f682a4d",
+        "name": "Lid",
+        "topic": "BinBrain/Bin1/LID",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "69a536c644a1407b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "0c1a389ed2a27e95"
+            ]
+        ]
+    },
+    {
+        "id": "69e585ada320c87c",
+        "type": "mqtt in",
+        "z": "10b482747f682a4d",
+        "name": "Distance",
+        "topic": "BinBrain/Bin1/DIST",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "69a536c644a1407b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "f382ad8325d81a30"
+            ]
+        ]
+    },
+    {
+        "id": "0c1a389ed2a27e95",
+        "type": "change",
+        "z": "10b482747f682a4d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "opened",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f382ad8325d81a30",
+        "type": "change",
+        "z": "10b482747f682a4d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "distance",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "61d06fdb12b410da",
+        "type": "http in",
+        "z": "10b482747f682a4d",
+        "name": "[GET] bin path",
+        "url": "/path",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 840,
+        "wires": [
+            [
+                "e478db0f52a8bebe"
+            ]
+        ]
+    },
+    {
+        "id": "825e83c5ac652117",
+        "type": "http response",
+        "z": "10b482747f682a4d",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 640,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "e478db0f52a8bebe",
+        "type": "mongodb4",
+        "z": "10b482747f682a4d",
+        "clientNode": "2dd66c70fd69d1b5",
+        "mode": "collection",
+        "collection": "bins",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": true,
+        "name": "",
+        "x": 270,
+        "y": 840,
+        "wires": [
+            [
+                "a7b679941bdc8bdb",
+                "b26a2a5b0e956596"
+            ]
+        ]
+    },
+    {
+        "id": "b26a2a5b0e956596",
+        "type": "function",
+        "z": "10b482747f682a4d",
+        "name": "buildPath",
+        "func": "function distance(point1, point2) {\n    // Calculate the Euclidean distance between two points\n    const [x1, y1] = point1.coordinates;\n    const [x2, y2] = point2.coordinates;\n    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);\n}\n\nfunction permute(arr) {\n    // Generate all permutations of an array\n    const result = [];\n    const permuteHelper = (arr, index) => {\n        if (index >= arr.length) {\n            result.push(arr.slice());\n        } else {\n            for (let i = index; i < arr.length; i++) {\n                [arr[index], arr[i]] = [arr[i], arr[index]];\n                permuteHelper(arr, index + 1);\n                [arr[index], arr[i]] = [arr[i], arr[index]];\n            }\n        }\n    };\n    permuteHelper(arr, 0);\n    return result;\n}\n\nfunction shortestPath(points) {\n    // Find the shortest path that visits all points exactly once\n    let shortestDistance = Infinity;\n    let shortestPath = null;\n    const permutations = permute(points);\n    for (const permutation of permutations) {\n        let totalDistance = 0;\n        for (let i = 0; i < permutation.length - 1; i++) {\n            totalDistance += distance(permutation[i], permutation[i + 1]);\n        }\n        if (totalDistance < shortestDistance) {\n            shortestDistance = totalDistance;\n            shortestPath = permutation;\n        }\n    }\n    return shortestPath;\n}\n\nlet objects = msg.payload;\n\n// Extract the full trash cans\nconst points = objects.filter(obj => obj.level > 50);\n\nmsg.payload = points\n\n// Find the shortest path that visits all points exactly once\n/*const shortest_path = shortestPath(points);\n\n// Sort the objects in the order of the shortest path\nmsg.payload = shortest_path.map(point => {\n    const index = points.indexOf(point);\n    return objects[index];\n});*/\n\n\n/*msg.payload = { \n    'coordinates': msg.req.body.coordinates,\n    'level': -1,\n    'closed': false,\n    'battery': -1,\n    'public' : true\n};*/\n//newMsg.projection = { 'name' : 1 , '_id' : 0 };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 452.22216796875,
+        "y": 838.8888549804688,
+        "wires": [
+            [
+                "825e83c5ac652117",
+                "a7b679941bdc8bdb"
+            ]
+        ]
+    },
+    {
+        "id": "a7b679941bdc8bdb",
+        "type": "debug",
+        "z": "10b482747f682a4d",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "ff91f10fa149fe79",
+        "type": "mongodb4",
+        "z": "10b482747f682a4d",
+        "clientNode": "2dd66c70fd69d1b5",
+        "mode": "collection",
+        "collection": "bins",
+        "operation": "updateOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 1090,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "23298cd68bc7c563",
+        "type": "http in",
+        "z": "4e20533703194c4c",
+        "name": "Test",
+        "url": "/test",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 120,
+        "wires": [
+            [
+                "0bb3343fa2e78a6a"
+            ]
+        ]
+    },
+    {
+        "id": "856bf28999535291",
+        "type": "http response",
+        "z": "4e20533703194c4c",
+        "name": "Test",
+        "statusCode": "201",
+        "headers": {},
+        "x": 510,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "0bb3343fa2e78a6a",
+        "type": "template",
+        "z": "4e20533703194c4c",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "This is the payload: {{payload}} !",
+        "output": "str",
+        "x": 360,
+        "y": 120,
+        "wires": [
+            [
+                "856bf28999535291"
+            ]
+        ]
+    },
+    {
+        "id": "641f9718.3bc628",
+        "type": "debug",
+        "z": "4e20533703194c4c",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 750,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d066e5b1.29b4c",
+        "type": "inject",
+        "z": "4e20533703194c4c",
+        "name": "2) Output Separately for each Record",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 252,
+        "y": 263,
+        "wires": [
+            [
+                "cb0238cd.f636d8"
+            ]
+        ]
+    },
+    {
+        "id": "2150137d.f8fe24",
+        "type": "inject",
+        "z": "4e20533703194c4c",
+        "name": "1) Find One only",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 166,
+        "y": 181,
+        "wires": [
+            [
+                "5e1f6911.ea48d"
+            ]
+        ]
+    },
+    {
+        "id": "5e1f6911.ea48d",
+        "type": "function",
+        "z": "4e20533703194c4c",
+        "name": "findOne",
+        "func": " var newMsg = {};\nnewMsg.operation  = 'findOne';\nnewMsg.payload    = { 'name' : 'Pete1' , 'names' : 'Pete2' };\nnewMsg.projection = { 'name' : 1 , '_id' : 0 };\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 192,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cb0238cd.f636d8",
+        "type": "function",
+        "z": "4e20533703194c4c",
+        "name": "find.forEach",
+        "func": "var newMsg = {};\nnewMsg.collection = 'names';\nnewMsg.operation  = 'find.forEach';\n//newMsg.payload    = { 'name' : 'Pete1' , 'names' : 'Pete2' };\nnewMsg.payload    = { 'name' : 'Pete1' };\nnewMsg.projection = { 'name' : 1 , '_id' : 0 };\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 192,
+        "y": 334,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8037a8d5.9568c",
+        "type": "function",
+        "z": "4e20533703194c4c",
+        "name": "Just get name",
+        "func": "var newMsg = {};\nnewMsg.payload    = msg.payload.name;\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 632,
+        "y": 181,
+        "wires": [
+            [
+                "641f9718.3bc628"
+            ]
+        ]
+    },
+    {
+        "id": "b21872e.7f75c9",
+        "type": "inject",
+        "z": "4e20533703194c4c",
+        "name": "4) Output once only as a list",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "",
+        "payloadType": "none",
+        "x": 224,
+        "y": 502,
+        "wires": [
+            [
+                "5f57a322.8a5ed4"
+            ]
+        ]
+    },
+    {
+        "id": "5f57a322.8a5ed4",
+        "type": "function",
+        "z": "4e20533703194c4c",
+        "name": "find.toArray",
+        "func": "var newMsg = {};\nnewMsg.collection = 'names';\nnewMsg.operation  = 'find.toArray';\n//newMsg.payload    = { 'name' : 'Pete1' , 'names' : 'Pete2' };\nnewMsg.payload    = { 'name' : 'Pete1' };\nnewMsg.projection = { 'name' : 1 , '_id' : 0 };\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 188,
+        "y": 561,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "91a4ffff.acc4a",
+        "type": "function",
+        "z": "4e20533703194c4c",
+        "name": "get names as a list",
+        "func": "// Outputs separate messages !!\n//var newMsg =[];\n//for (var i = 0; i < msg.payload.length; i++) { \n//newMsg.push({name: msg.payload[i].name}) };\n//return [ newMsg ];\n\n// Combines into a single list (or array)\nvar newMsg =[];\nfor (var i = 0; i < msg.payload.length; i++) {\n//newMsg.push({name:  msg.payload[i].name } ) };\nnewMsg.push(msg.payload[i].name) };\nmsg.payload = newMsg;\nreturn  msg;\n",
+        "outputs": 1,
+        "x": 633,
+        "y": 561,
+        "wires": [
+            [
+                "641f9718.3bc628"
+            ]
+        ]
+    },
+    {
+        "id": "b4995ada.eeba08",
+        "type": "inject",
+        "z": "4e20533703194c4c",
+        "name": "3) Enter data",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "",
+        "payloadType": "none",
+        "x": 173,
+        "y": 413,
+        "wires": [
+            [
+                "f1950f87.ec4da"
+            ]
+        ]
+    },
+    {
+        "id": "f1950f87.ec4da",
+        "type": "function",
+        "z": "4e20533703194c4c",
+        "name": "insert (or delete)",
+        "func": "var newMsg = {};\nnewMsg.collection = 'names';\n//newMsg.operation  = 'deleteOne';\nnewMsg.operation  = 'insert';\nnewMsg.payload    = { 'name' : 'Pete1' , 'names' : 'Smith4' };\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    }
+]
