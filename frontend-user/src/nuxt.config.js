@@ -12,12 +12,12 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - BinBrain',
+    titleTemplate: '%s - LemonBin',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover'},
       // {name: 'format-detection', content: 'telephone=no'},
-      {name: 'theme-color', content: '#1565c0'}
+      {name: 'theme-color', content: '#00897B'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
@@ -58,8 +58,8 @@ export default {
       dark: false,
       themes: {
         light: {
-          primary: colors.green.base,
-          accent: colors.pink.darken2,
+          primary: colors.teal.lighten1,
+          accent: colors.yellow.darken1,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,

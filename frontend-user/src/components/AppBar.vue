@@ -5,7 +5,7 @@
 
       <!-- AppBar Text Title -->
       <v-toolbar-title class="white--text text-uppercase text-center" style="cursor: pointer" @click="$vuetify.goTo('#trash', {duration:1000})">
-        BinBrain
+        LemonBin
       </v-toolbar-title>
 
       <v-spacer/>

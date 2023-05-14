@@ -16,7 +16,7 @@
       </v-card-text>-->
       <v-divider style="width: 50%" class="ma-auto grey darken-3"/>
       <v-card-text class="grey--text darken-2">
-        BinBrain
+        LemonBin
       </v-card-text>
     </v-card>
   </v-footer>
