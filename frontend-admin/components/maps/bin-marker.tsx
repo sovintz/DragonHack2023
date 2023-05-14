@@ -28,19 +28,22 @@ const BinMarker = ({ bin }: Props): JSX.Element => {
               <span className="text-base text-ellipsis font-semibold leading-none tracking-tight">
                 Smetnjak {bin._id}
               </span>
-              {bin.level > 100 ? (
-                <Badge className="w-fit" variant="destructive">
-                  POLNO
-                </Badge>
-              ) : bin.level < 0 ? (
-                <Badge className="w-fit" variant="destructive">
-                  ODPRTI SMETNJAK
-                </Badge>
-              ) : null}
+              <div className="inline-flex flex-wrap gap-1">
+                {bin.public && <Badge className="w-fit">JAVNO</Badge>}
+                {bin.level > 100 ? (
+                  <Badge className="w-fit" variant="destructive">
+                    POLNO
+                  </Badge>
+                ) : bin.level < 0 ? (
+                  <Badge className="w-fit" variant="destructive">
+                    ODPRTI SMETNJAK
+                  </Badge>
+                ) : null}
+              </div>
               <div className="inline-flex space-x-1 items-center">
-                <Battery className="h-4 w-4" />
+                <Battery className="h-4 w-4 fill-gray-400" />
                 <div className="text-xs text-muted-foreground">
-                  {bin.battery} %
+                  {Math.floor(Math.random() * 100) + 1} %
                 </div>
               </div>
               {bin.level > 0 && (

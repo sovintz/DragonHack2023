@@ -1,29 +1,33 @@
-import { LatLngExpression } from "leaflet";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
 } from "./ui/accordion";
-
-type RouteStep = {
-  binId: number;
-  coordinates: LatLngExpression;
-};
+import { Bin } from "@/api/endpoints";
 
 interface Props {
-  steps: RouteStep[];
+  bins: Bin[];
 }
 
-const OptimalRouteAccordion = ({ steps }: Props): JSX.Element => {
+const OptimalRouteAccordion = ({ bins }: Props): JSX.Element => {
   return (
     <Accordion type="single" collapsible className="w-full">
-      {steps.map((step, index) => (
-        <AccordionItem value={step.binId.toString()} key={step.binId}>
+      {bins.map((bin, index) => (
+        <AccordionItem value={bin._id.toString()} key={bin._id}>
           <AccordionTrigger>
-            {index + 1}. Smetnjak #{step.binId}
+            {index + 1}. Smetnjak #{bin._id}
           </AccordionTrigger>
-          <AccordionContent>Koordinate:</AccordionContent>
+          <AccordionContent>
+            <div className="flex flex-col">
+              <div className="text-sm text-muted-foreground">
+                Latitude: {bin.coordinates[0]}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Longitude: {bin.coordinates[0]}
+              </div>
+            </div>
+          </AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>

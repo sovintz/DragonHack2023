@@ -14,15 +14,15 @@ import {
 const notifications = [
   {
     title: "Koš #33 izpraznjen.",
-    description: "1 hour ago",
+    description: "Pred 1 uro",
   },
   {
     title: "Koš #133 izpraznjen.",
-    description: "1 hour ago",
+    description: "Pred 1 uro",
   },
   {
     title: "Koš #133 je POLN!",
-    description: "2 hours ago",
+    description: "Pred 2 urama",
   },
 ];
 
@@ -67,7 +67,7 @@ const NotificationsCard = ({ className, ...props }: CardProps) => {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">
+        <Button className="w-full" variant="secondary">
           <Check className="mr-2 h-4 w-4" /> Označi vse kot prebrano
         </Button>
       </CardFooter>

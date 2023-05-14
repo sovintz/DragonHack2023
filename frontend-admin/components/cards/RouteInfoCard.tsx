@@ -18,7 +18,14 @@ const RouteInfoCard = () => {
     <Card className="w-[420px]">
       <CardHeader>
         <CardTitle>Odvoz smeti</CardTitle>
-        <CardDescription>Danes je:</CardDescription>
+        <CardDescription>
+          Danes je:{" "}
+          {new Date().toLocaleString("sl-SI", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })}
+        </CardDescription>
       </CardHeader>
       <CardFooter className="gap-2">
         <Button

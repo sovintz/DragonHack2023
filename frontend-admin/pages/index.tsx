@@ -37,7 +37,11 @@ export default function Home() {
         </div>
         {/* Trashcan list card */}
         <div className="col-span-4 flex relative flex-col px-2 py-8">
-          {view === "basic_info" ? <BasicInfoView /> : <BinRouteView />}
+          {view === "basic_info" ? (
+            <BasicInfoView />
+          ) : (
+            <BinRouteView bins={pathsData} />
+          )}
         </div>
       </div>
     </main>

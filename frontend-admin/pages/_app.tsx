@@ -5,7 +5,11 @@ import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { refetchInterval: 1500 },
+  },
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
