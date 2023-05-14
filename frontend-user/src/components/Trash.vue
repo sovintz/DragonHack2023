@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative; height: 20em">
     <div style="position: absolute; width:80%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-      <svg  xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" stroke="black"
+      <svg  xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" :stroke="color2"
            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2 ma-auto">
         <path d="M3 6h18"></path>
         <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
@@ -51,9 +51,9 @@ export default {
     },
     color2(){
       if (!this.closed){
-        return "black"
+        return "#26A69A"
       }
-      return "grey"
+      return "black"
     },
     localPercentage(){
       if (!this.closed){
