@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { refetchInterval: 1500 },
+    queries: { refetchInterval: 1000 },
   },
 });
 
