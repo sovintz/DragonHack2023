@@ -53,7 +53,7 @@ export default {
       if (!this.closed){
         return "#26A69A"
       }
-      return "black"
+      return "#37474F"
     },
     localPercentage(){
       if (!this.closed){
