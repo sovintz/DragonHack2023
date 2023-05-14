@@ -5,7 +5,6 @@
       <Nuxt/>
     </v-main>
     <Footer/>
-    <Cookies/>
   </v-app>
 </template>
 
